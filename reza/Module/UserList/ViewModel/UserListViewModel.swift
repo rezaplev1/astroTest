@@ -104,9 +104,11 @@ final class UserListViewModel: ObservableObject {
                 self.isLoading = false
                 self.isLoadingNextPage = false
                 self.isInitialLoading = false
-
+                
                 if case .failure = completion {
-                    self.isError = true
+                    if self.currentPage == 1 {
+                        self.isError = true
+                    }
                 }
             }, receiveValue: { [weak self] newUsers in
                 guard let self = self else { return }
