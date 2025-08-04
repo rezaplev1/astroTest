@@ -15,29 +15,31 @@ struct UserListView: View {
             // Toolbar & Search
             VStack(alignment: .leading) {
                 Text("GitHub Users").font(.headline)
-                Text("Explore developers").font(.subheadline).foregroundColor(.gray)
+                Text("Astro Test").font(.subheadline).foregroundColor(.gray)
             }
 
             TextField("Search username...", text: $viewModel.searchText)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-
+            
             // Sort buttons
-            HStack {
-                Button(action: { viewModel.setSortType(.ascending) }) {
-                    Text("Ascending")
-                        .font(.footnote)
-                        .padding(8)
-                        .background(viewModel.sortType == .ascending ? Color.blue : Color.gray.opacity(0.2))
-                        .foregroundColor(.white)
-                        .cornerRadius(6)
-                }
-                Button(action: { viewModel.setSortType(.descending) }) {
-                    Text("Descending")
-                        .font(.footnote)
-                        .padding(8)
-                        .background(viewModel.sortType == .descending ? Color.blue : Color.gray.opacity(0.2))
-                        .foregroundColor(.white)
-                        .cornerRadius(6)
+            if !viewModel.users.isEmpty && !viewModel.isInitialLoading && !viewModel.isError {
+                HStack {
+                    Button(action: { viewModel.setSortType(.ascending) }) {
+                        Text("Ascending")
+                            .font(.footnote)
+                            .padding(8)
+                            .background(viewModel.sortType == .ascending ? Color.blue : Color.gray.opacity(0.2))
+                            .foregroundColor(.white)
+                            .cornerRadius(6)
+                    }
+                    Button(action: { viewModel.setSortType(.descending) }) {
+                        Text("Descending")
+                            .font(.footnote)
+                            .padding(8)
+                            .background(viewModel.sortType == .descending ? Color.blue : Color.gray.opacity(0.2))
+                            .foregroundColor(.white)
+                            .cornerRadius(6)
+                    }
                 }
             }
 

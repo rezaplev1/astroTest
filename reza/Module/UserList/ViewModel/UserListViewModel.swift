@@ -122,16 +122,13 @@ final class UserListViewModel: ObservableObject {
             })
             .store(in: &cancellables)
     }
-
     
     // MARK: - Favorite Action
     func toggleFavorite(user: UserViewData) {
         if user.isFavorite {
-            // Hapus dari Core Data
             coreData.deleteFavoriteUser(id: user.id)
             updateFavoriteStatus(userId: user.id, isFavorite: false)
         } else {
-            // Simpan ke Core Data
             coreData.saveFavoriteUser(id: user.id, username: user.username)
             updateFavoriteStatus(userId: user.id, isFavorite: true)
         }

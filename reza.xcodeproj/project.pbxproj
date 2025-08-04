@@ -14,7 +14,6 @@
 		1A12893C2E3F192600B67109 /* reza.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 1A12892B2E3F192600B67109 /* reza.xcdatamodeld */; };
 		1A12893F2E3F193900B67109 /* rezaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A12893D2E3F193900B67109 /* rezaTests.swift */; };
 		1A1289432E3F193F00B67109 /* rezaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1289402E3F193F00B67109 /* rezaUITests.swift */; };
-		1A1289442E3F193F00B67109 /* rezaUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1289412E3F193F00B67109 /* rezaUITestsLaunchTests.swift */; };
 		1A12894F2E3F29EB00B67109 /* UserListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A12894E2E3F29EB00B67109 /* UserListViewModel.swift */; };
 		1A1289512E3F29FE00B67109 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1289502E3F29FE00B67109 /* UserListViewController.swift */; };
 		1A1289532E3F2A2500B67109 /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1289522E3F2A2500B67109 /* UserListView.swift */; };
@@ -25,6 +24,7 @@
 		1A12895F2E3F3BE800B67109 /* GitHubAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A12895E2E3F3BE700B67109 /* GitHubAPIService.swift */; };
 		1A1289612E3F3C4A00B67109 /* GitHubUserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1289602E3F3C4900B67109 /* GitHubUserDTO.swift */; };
 		1A1289672E3F5C2400B67109 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1289662E3F5C2000B67109 /* Helpers.swift */; };
+		1A12896A2E3F808500B67109 /* MockGitHubAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A1289692E3F808300B67109 /* MockGitHubAPIService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,7 +56,6 @@
 		1A12892F2E3F192600B67109 /* reza.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = reza.xcdatamodel; sourceTree = "<group>"; };
 		1A12893D2E3F193900B67109 /* rezaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rezaTests.swift; sourceTree = "<group>"; };
 		1A1289402E3F193F00B67109 /* rezaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rezaUITests.swift; sourceTree = "<group>"; };
-		1A1289412E3F193F00B67109 /* rezaUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rezaUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		1A12894E2E3F29EB00B67109 /* UserListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewModel.swift; sourceTree = "<group>"; };
 		1A1289502E3F29FE00B67109 /* UserListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
 		1A1289522E3F2A2500B67109 /* UserListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListView.swift; sourceTree = "<group>"; };
@@ -67,6 +66,7 @@
 		1A12895E2E3F3BE700B67109 /* GitHubAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubAPIService.swift; sourceTree = "<group>"; };
 		1A1289602E3F3C4900B67109 /* GitHubUserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GitHubUserDTO.swift; sourceTree = "<group>"; };
 		1A1289662E3F5C2000B67109 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		1A1289692E3F808300B67109 /* MockGitHubAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGitHubAPIService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +143,7 @@
 		1A12893E2E3F193900B67109 /* rezaTests */ = {
 			isa = PBXGroup;
 			children = (
+				1A1289682E3F806700B67109 /* Mocks */,
 				1A12893D2E3F193900B67109 /* rezaTests.swift */,
 			);
 			path = rezaTests;
@@ -152,7 +153,6 @@
 			isa = PBXGroup;
 			children = (
 				1A1289402E3F193F00B67109 /* rezaUITests.swift */,
-				1A1289412E3F193F00B67109 /* rezaUITestsLaunchTests.swift */,
 			);
 			path = rezaUITests;
 			sourceTree = "<group>";
@@ -224,6 +224,14 @@
 				1A12895B2E3F3AC300B67109 /* CoreDataService.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		1A1289682E3F806700B67109 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				1A1289692E3F808300B67109 /* MockGitHubAPIService.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -384,6 +392,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A12893F2E3F193900B67109 /* rezaTests.swift in Sources */,
+				1A12896A2E3F808500B67109 /* MockGitHubAPIService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,7 +401,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A1289432E3F193F00B67109 /* rezaUITests.swift in Sources */,
-				1A1289442E3F193F00B67109 /* rezaUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

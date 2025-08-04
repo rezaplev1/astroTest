@@ -29,13 +29,11 @@ struct GitHubUserDTO: Decodable {
     }
 
     func toViewData() -> UserViewData? {
-        // Pastikan field yang penting tidak nil
         guard let id = id, let login = login else { return nil }
 
         return UserViewData(
             id: String(id),
             username: login,
-//            avatarUrl: avatarUrl,
             isFavorite: false
         )
     }

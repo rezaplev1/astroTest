@@ -26,54 +26,34 @@ struct APIRequest {
 final class APIClient {
     private let baseURL: URL
     private let urlSession: URLSession
-
+    
     init(baseURL: URL, urlSession: URLSession = .shared) {
         self.baseURL = baseURL
         self.urlSession = urlSession
     }
-
+    
+    
     func request<T: Decodable>(_ apiRequest: APIRequest, responseType: T.Type) -> AnyPublisher<T, Error> {
         guard var components = URLComponents(url: baseURL.appendingPathComponent(apiRequest.path), resolvingAgainstBaseURL: false) else {
-            print("[APIClient] Invalid URL")
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
-
+        
         components.queryItems = apiRequest.queryItems
-
+        
         guard let url = components.url else {
-            print("[APIClient] Invalid URL after adding query items")
             return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
         }
-
+        
         var request = URLRequest(url: url)
         request.httpMethod = apiRequest.method.rawValue
         request.httpBody = apiRequest.body
-
+        
         apiRequest.headers?.forEach { key, value in
             request.setValue(value, forHTTPHeaderField: key)
         }
-
-        // Print request info
-        print("➡️ Request: \(request.httpMethod ?? "") \(request.url?.absoluteString ?? "")")
-        if let headers = request.allHTTPHeaderFields {
-            print("Headers: \(headers)")
-        }
-        if let body = request.httpBody,
-           let bodyString = String(data: body, encoding: .utf8) {
-            print("Body: \(bodyString)")
-        }
-
+        
         return urlSession.dataTaskPublisher(for: request)
             .tryMap { data, response in
-                if let httpResponse = response as? HTTPURLResponse {
-                    print("⬅️ Response status code: \(httpResponse.statusCode)")
-                }
-
-                // Print response data as string (if possible)
-                if let responseString = String(data: data, encoding: .utf8) {
-                    print("Response data: \(responseString)")
-                }
-
                 guard let httpResponse = response as? HTTPURLResponse,
                       (200..<300).contains(httpResponse.statusCode) else {
                     throw URLError(.badServerResponse)
@@ -85,37 +65,4 @@ final class APIClient {
             .eraseToAnyPublisher()
     }
     
-    
-//    func request<T: Decodable>(_ apiRequest: APIRequest, responseType: T.Type) -> AnyPublisher<T, Error> {
-//        guard var components = URLComponents(url: baseURL.appendingPathComponent(apiRequest.path), resolvingAgainstBaseURL: false) else {
-//            return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
-//        }
-//
-//        components.queryItems = apiRequest.queryItems
-//
-//        guard let url = components.url else {
-//            return Fail(error: URLError(.badURL)).eraseToAnyPublisher()
-//        }
-//
-//        var request = URLRequest(url: url)
-//        request.httpMethod = apiRequest.method.rawValue
-//        request.httpBody = apiRequest.body
-//
-//        apiRequest.headers?.forEach { key, value in
-//            request.setValue(value, forHTTPHeaderField: key)
-//        }
-//
-//        return urlSession.dataTaskPublisher(for: request)
-//            .tryMap { data, response in
-//                guard let httpResponse = response as? HTTPURLResponse,
-//                      (200..<300).contains(httpResponse.statusCode) else {
-//                    throw URLError(.badServerResponse)
-//                }
-//                return data
-//            }
-//            .decode(type: T.self, decoder: JSONDecoder())
-//            .receive(on: DispatchQueue.main)
-//            .eraseToAnyPublisher()
-//    }
-
 }

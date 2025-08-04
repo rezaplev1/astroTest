@@ -13,7 +13,7 @@ final class CoreDataService {
     let container: NSPersistentContainer
 
     private init() {
-        container = NSPersistentContainer(name: "reza") // ganti sesuai nama model kamu
+        container = NSPersistentContainer(name: "reza")
         container.loadPersistentStores { desc, error in
             if let error = error {
                 fatalError("Failed to load Core Data store: \(error)")
